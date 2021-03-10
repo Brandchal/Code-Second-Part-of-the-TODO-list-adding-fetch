@@ -6,16 +6,16 @@ export class Home extends React.Component {
 
 		this.state = {
 			todos: [
-				{ done: false, title: "Hacer la cama", id: Math.random() * 10 },
+				{ done: false, title: "Make the bed", id: Math.random() * 10 },
 				{
 					done: false,
-					title: "Lavar mis manos",
+					title: "Wash my hands",
 					id: Math.random() * 10
 				},
-				{ done: false, title: "Comer", id: Math.random() * 10 },
+				{ done: false, title: "Eat", id: Math.random() * 10 },
 				{
 					done: false,
-					title: "Pasear con el perro",
+					title: "Walk the dog",
 					id: Math.random() * 10
 				}
 			],
@@ -52,9 +52,10 @@ export class Home extends React.Component {
 						<button
 							className="destroy"
 							onClick={() => this.deleteTask(task.id)}>
-							<i className="fa fa-trash" />
+							<i className="fa fa-minus-square" />
 						</button>
 					</span>
+
 					<label>{task.title}</label>
 				</li>
 			);
@@ -62,12 +63,12 @@ export class Home extends React.Component {
 
 		return (
 			<div id="container">
-				<h1 className="todo-header">To do List</h1>
+				<h1 className="header">To do List</h1>
 				<form onSubmit={this.formSubmit.bind(this)}>
 					<input
 						autoFocus={true}
 						className="addToDo"
-						placeholder="Que necesitas hacer?"
+						placeholder="What needs to be done?"
 						value={this.state.taskInput}
 						onChange={evt =>
 							this.setState({ taskInput: evt.target.value })
@@ -75,6 +76,7 @@ export class Home extends React.Component {
 					/>
 				</form>
 				<ul className="todo-list">{tasksToRender}</ul>
+				<p className="footer"># item left</p>
 			</div>
 		);
 	}
