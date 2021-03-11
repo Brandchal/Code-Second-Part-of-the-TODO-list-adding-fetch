@@ -24,7 +24,11 @@ export class Home extends React.Component {
 	}
 
 	countList() {
-		return this.state.notas.length;
+		if (this.state.notas.length == 0) {
+			return "empty list";
+		} else {
+			return this.state.notas.length + " item left";
+		}
 	}
 
 	formSubmit(e) {
@@ -82,7 +86,7 @@ export class Home extends React.Component {
 				</form>
 
 				<ul className="todo-list">{tasksToRender}</ul>
-				<p className="footer">{this.countList()} item left</p>
+				<p className="footer">{this.countList()}</p>
 			</div>
 		);
 	}
