@@ -5,7 +5,7 @@ export class Home extends React.Component {
 		super();
 
 		this.state = {
-			todos: [
+			notas: [
 				{ done: false, title: "Make the bed", id: Math.random() * 10 },
 				{
 					done: false,
@@ -23,10 +23,14 @@ export class Home extends React.Component {
 		};
 	}
 
+	countList() {
+		return this.state.notas.length;
+	}
+
 	formSubmit(e) {
 		e.preventDefault();
 		this.setState({
-			todos: this.state.todos.concat([
+			notas: this.state.notas.concat([
 				{
 					title: this.state.taskInput,
 					done: false,
@@ -40,12 +44,12 @@ export class Home extends React.Component {
 
 	deleteTask(taskId) {
 		this.setState({
-			todos: this.state.todos.filter(task => task.id != taskId)
+			notas: this.state.notas.filter(task => task.id != taskId)
 		});
 	}
 
 	render() {
-		let tasksToRender = this.state.todos.map(task => {
+		let tasksToRender = this.state.notas.map(task => {
 			return (
 				<li key={task.id}>
 					<span>
@@ -64,6 +68,7 @@ export class Home extends React.Component {
 		return (
 			<div id="container">
 				<h1 className="header">To do List</h1>
+
 				<form onSubmit={this.formSubmit.bind(this)}>
 					<input
 						autoFocus={true}
@@ -75,8 +80,9 @@ export class Home extends React.Component {
 						}
 					/>
 				</form>
+
 				<ul className="todo-list">{tasksToRender}</ul>
-				<p className="footer"># item left</p>
+				<p className="footer">{this.countList()} item left</p>
 			</div>
 		);
 	}
