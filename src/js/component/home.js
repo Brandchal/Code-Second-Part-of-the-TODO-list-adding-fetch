@@ -40,6 +40,7 @@ export class Home extends React.Component {
 			.then(
 				data =>
 					data.map(todo => {
+						console.log(data);
 						this.setState({
 							notas: this.state.notas.concat([
 								{
@@ -141,7 +142,7 @@ export class Home extends React.Component {
 		}
 
 		if (isLoading) {
-			return <p>Loading ...</p>;
+			return <p>Loading...</p>;
 		}
 
 		let tasksToRender = notas.map(task => {
@@ -161,7 +162,7 @@ export class Home extends React.Component {
 
 		return (
 			<div id="container">
-				<h1 className="todo-header">To do List</h1>
+				<h1 className="header">To do List</h1>
 				<form onSubmit={this.formSubmit.bind(this)}>
 					<input
 						autoFocus={true}
