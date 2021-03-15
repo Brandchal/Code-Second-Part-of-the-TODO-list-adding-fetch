@@ -7,7 +7,7 @@ export class Home extends React.Component {
 		super();
 
 		this.state = {
-			notas: [],
+			notes: [],
 			isLoading: false,
 			error: null,
 			taskInput: ""
@@ -15,10 +15,10 @@ export class Home extends React.Component {
 	}
 
 	countList() {
-		if (this.state.notas.length == 0) {
+		if (this.state.notes.length == 0) {
 			return "empty list";
 		} else {
-			return this.state.notas.length + " item left";
+			return this.state.notes.length + " item left";
 		}
 	}
 
@@ -34,7 +34,7 @@ export class Home extends React.Component {
 				if (response.ok) {
 					return response.json();
 				} else {
-					throw new Error("Something went wrong ...");
+					throw new Error("An error has occurred");
 				}
 			})
 			.then(
@@ -42,7 +42,7 @@ export class Home extends React.Component {
 					data.map(todo => {
 						console.log(data);
 						this.setState({
-							notas: this.state.notas.concat([
+							notes: this.state.notes.concat([
 								{
 									label: todo.label,
 									done: todo.done,
@@ -65,7 +65,7 @@ export class Home extends React.Component {
 		};
 
 		this.setState({
-			notas: this.state.notas.concat([
+			notes: this.state.notes.concat([
 				{
 					label: newTodo.label,
 					done: newTodo.done,
@@ -75,12 +75,12 @@ export class Home extends React.Component {
 			taskInput: ""
 		});
 
-		let notas = this.state.notas.concat([newTodo]);
+		let notes = this.state.notes.concat([newTodo]);
 
-		if (notas.length == 1) {
+		if (notes.length == 1) {
 			fetch(URL_USER, {
 				method: "POST",
-				body: JSON.stringify(notas),
+				body: JSON.stringify(notes),
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -91,7 +91,7 @@ export class Home extends React.Component {
 		} else {
 			fetch(URL_USER, {
 				method: "PUT",
-				body: JSON.stringify(notas),
+				body: JSON.stringify(notes),
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -106,15 +106,15 @@ export class Home extends React.Component {
 
 	deleteTask(taskId) {
 		this.setState({
-			notas: this.state.notas.filter(task => task.id != taskId)
+			notes: this.state.notes.filter(task => task.id != taskId)
 		});
 
-		let notas = this.state.notas.filter(task => task.id != taskId);
+		let notes = this.state.notes.filter(task => task.id != taskId);
 
-		if (notas.length >= 1) {
+		if (notes.length >= 1) {
 			fetch(URL_USER, {
 				method: "PUT",
-				body: JSON.stringify(notas),
+				body: JSON.stringify(notes),
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -136,7 +136,7 @@ export class Home extends React.Component {
 	}
 
 	render() {
-		const { notas, isLoading, error } = this.state;
+		const { notes, isLoading, error } = this.state;
 		if (error) {
 			return <p>{error.message}</p>;
 		}
@@ -145,7 +145,7 @@ export class Home extends React.Component {
 			return <p>Loading...</p>;
 		}
 
-		let tasksToRender = notas.map(task => {
+		let tasksToRender = notes.map(task => {
 			return (
 				<li key={task.id}>
 					<span>
