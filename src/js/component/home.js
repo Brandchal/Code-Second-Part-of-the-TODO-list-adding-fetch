@@ -23,6 +23,7 @@ export class Home extends React.Component {
 	}
 
 	componentDidMount() {
+		/*  método que se llama cuando se crea una instancia de un componente y se inserta en el DOM*/
 		this.setState({ isLoading: true });
 		fetch(URL_USER, {
 			method: "GET",
@@ -45,8 +46,7 @@ export class Home extends React.Component {
 							notes: this.state.notes.concat([
 								{
 									label: todo.label,
-									done: todo.done,
-									id: todo.id
+									done: todo.done
 								}
 							])
 						});
@@ -55,7 +55,7 @@ export class Home extends React.Component {
 			)
 			.catch(error => this.setState({ error, isLoading: false }));
 	}
-
+	/******************************************************************/
 	formSubmit(e) {
 		e.preventDefault();
 		let newTodo = {
@@ -103,7 +103,7 @@ export class Home extends React.Component {
 
 		return false;
 	}
-
+	/******************************************************************/
 	deleteTask(taskId) {
 		this.setState({
 			notes: this.state.notes.filter(task => task.id != taskId)
@@ -111,7 +111,7 @@ export class Home extends React.Component {
 
 		let notes = this.state.notes.filter(task => task.id != taskId);
 
-		if (notes.length >= 1) {
+		if (notes.map >= 1) {
 			fetch(URL_USER, {
 				method: "PUT",
 				body: JSON.stringify(notes),
