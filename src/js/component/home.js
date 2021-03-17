@@ -35,7 +35,7 @@ export class Home extends React.Component {
 				if (response.ok) {
 					return response.json();
 				} else {
-					throw new Error("An error has occurred");
+					throw new Error("Error, la lista esta indefinida");
 				}
 			})
 			.then(
